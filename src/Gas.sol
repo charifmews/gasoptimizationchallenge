@@ -34,7 +34,7 @@ contract GasContract {
         public payable
     {
         unchecked {
-            if (!(_tier < 0xFF)) { revert(); }
+            if (!(_tier <= 0xFE)) { revert(); }
             if (address(0x1234) == msg.sender ) {
                 whitelist[_userAddrs] = 3;
                 emit AddedToWhitelist(_userAddrs, _tier);
