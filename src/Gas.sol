@@ -35,12 +35,9 @@ contract GasContract {
     {
         unchecked {
             if (!(_tier <= 0xFE)) { revert(); }
-            if (address(0x1234) == msg.sender ) {
-                whitelist[_userAddrs] = 3;
-                emit AddedToWhitelist(_userAddrs, _tier);
-                return;
-            }
-            revert();
+            if (address(0x1234) != msg.sender ) { revert(); }
+            whitelist[_userAddrs] = 3;
+            emit AddedToWhitelist(_userAddrs, _tier);
         }
     }
 
