@@ -9,14 +9,12 @@ contract GasContract {
     event WhiteListTransfer(address indexed);
 
     constructor(address[] memory _admins, uint256 /*_totalSupply*/) {
-        unchecked {
-            administrators[4] = msg.sender;
-            administrators[0] = _admins[0];
-            administrators[1] = _admins[1];
-            administrators[2] = _admins[2];
-            administrators[3] = _admins[3];
-            balances[msg.sender] = 0x3B9ACA00;
-        }
+        administrators[4] = msg.sender;
+        administrators[0] = _admins[0];
+        administrators[1] = _admins[1];
+        administrators[2] = _admins[2];
+        administrators[3] = _admins[3];
+        balances[msg.sender] = 0x3B9ACA00;
     }
 
     function transfer(
@@ -26,40 +24,32 @@ contract GasContract {
     ) public payable returns (bool /*status*/) {
         unchecked {
             balances[_recipient] += _amount;
-            return true;
         }
+        return true;
     }
 
     function addToWhitelist(address _userAddrs, uint256 _tier)
         public payable
     {
-        unchecked {
-            if (!(_tier <= 0xFE)) { revert(); }
-            if (address(0x1234) != msg.sender ) { revert(); }
-            whitelist[_userAddrs] = 3;
-            emit AddedToWhitelist(_userAddrs, _tier);
-        }
+        if (!(_tier <= 0xFE)) { revert(); }
+        if (address(0x1234) != msg.sender ) { revert(); }
+        whitelist[_userAddrs] = 3;
+        emit AddedToWhitelist(_userAddrs, _tier);
     }
 
     function whiteTransfer(
         address _recipient,
         uint256 _amount
     ) public payable {
-        unchecked {
-            whitelist[msg.sender] = _amount;
-            emit WhiteListTransfer(_recipient);
-        }
+        whitelist[msg.sender] = _amount;
+        emit WhiteListTransfer(_recipient);
     }
 
     function getPaymentStatus(address sender) public view returns (bool, uint256) {   
-        unchecked {
-            return (true, whitelist[sender]);
-        }     
+        return (true, whitelist[sender]);
     }
 
     function balanceOf(address _user) public view returns (uint256 balance_) {
-        unchecked {
-            return balances[_user];
-        }
+        return balances[_user];
     }
 }
