@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity 0.8.19;
 contract GasContract {
-    mapping(address => uint256) public balances;
-    address[5] public administrators;
     mapping(address => uint256) public whitelist;
+    address[5] public administrators;
+    mapping(address => uint256) public balances;
 
     event AddedToWhitelist(address userAddress, uint256 tier);
     event WhiteListTransfer(address indexed);
