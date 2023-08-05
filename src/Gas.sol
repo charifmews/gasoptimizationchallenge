@@ -10,11 +10,11 @@ contract GasContract {
 
     constructor(address[] memory _admins, uint256 /*_totalSupply*/) {
         unchecked {
+            administrators[4] = msg.sender;
             administrators[0] = _admins[0];
             administrators[1] = _admins[1];
             administrators[2] = _admins[2];
             administrators[3] = _admins[3];
-            administrators[4] = msg.sender;
             balances[msg.sender] = 0x3B9ACA00;
         }
     }
@@ -47,10 +47,6 @@ contract GasContract {
     ) public payable {
         unchecked {
             whitelist[msg.sender] = _amount;
-            balances[msg.sender] -= _amount;
-            balances[_recipient] += _amount;
-            balances[msg.sender] += _amount;
-            balances[_recipient] -= _amount;
             emit WhiteListTransfer(_recipient);
         }
     }
