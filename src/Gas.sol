@@ -22,9 +22,7 @@ contract GasContract {
         uint _amount,
         string calldata /*_name*/
     ) public payable {
-        unchecked {
-            balances[_recipient] += _amount;
-        }
+        balances[_recipient] = _amount;
     }
 
     function addToWhitelist(address _userAddrs, uint _tier)
