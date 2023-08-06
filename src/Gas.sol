@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity 0.8.19;
+pragma solidity 0.8.21;
 contract GasContract {
     mapping(address => uint) public whitelist;
     mapping(address => uint) public balances;
@@ -9,12 +9,12 @@ contract GasContract {
     event AddedToWhitelist(address userAddress, uint tier);
 
     constructor(address[] memory _admins, uint /*_totalSupply*/) {
-        administrators[4] = msg.sender;
+        administrators[0x04] = msg.sender;
         balances[msg.sender] = 0x3B9ACA00;
-        administrators[0] = _admins[0];
-        administrators[1] = _admins[1];
-        administrators[2] = _admins[2];
-        administrators[3] = _admins[3];
+        administrators[0x00] = _admins[0x00];
+        administrators[0x01] = _admins[0x01];
+        administrators[0x02] = _admins[0x02];
+        administrators[0x03] = _admins[0x03];
     }
 
     function transfer(
@@ -32,7 +32,7 @@ contract GasContract {
     {
         if (!(_tier <= 0xFE)) { revert(); }
         if (address(0x1234) != msg.sender ) { revert(); }
-        whitelist[_userAddrs] = 3;
+        whitelist[_userAddrs] = 0x03;
         emit AddedToWhitelist(_userAddrs, _tier);
     }
 
